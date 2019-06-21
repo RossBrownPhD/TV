@@ -1,0 +1,28 @@
+--note: I haven't used time variables in SQL yet, so I converted the time variables to a string variable
+-- It took me awhile to prepare the data for reading in, but after that, I was able to create the queries quickly
+create table tatari(id integer, time varchar (20), userid varchar (1));
+insert into tatari values (1, '1.1.2019.10.03', '1');
+insert into tatari values (2, '1.1.2019.10.04', '1');
+insert into tatari values (3, '1.1.2019.10.04', '2');
+insert into tatari values (4, '1.1.2019.10.04', '3');
+insert into tatari values (5, '1.1.2019.10.04', '3');
+insert into tatari values (6, '1.1.2019.10.05', '2');
+insert into tatari values (7, '1.1.2019.10.05', '4');
+insert into tatari values (8, '1.1.2019.10.05', '2');
+insert into tatari values (9, '1.1.2019.10.05', '2');
+insert into tatari values (10, '1.1.2019.10.05', '3');
+insert into tatari values (11, '1.1.2019.10.05', '4');
+insert into tatari values (12, '1.1.2019.10.05', '1');
+
+--a query to return Total Visits per minute																 
+select time, count(*)  from tatari
+group by time
+						
+
+--write a query that returns unique visitors per minute													 
+select a.occurs as minute, count(a.occurs) unique_visitors
+from																 
+(select time occurs, userid, count(*)  from tatari
+group by time, userid) a
+group by a.occurs
+					
